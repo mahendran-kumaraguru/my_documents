@@ -22,6 +22,7 @@ class DocumentsController < ApplicationController
 
   def create
   	document = Document.new(document_params)
+  	document.user_id = session[:user_id]
   	if(document.save)
   		redirect_to document_path(document.id, capitalize:true)
   	else
@@ -41,17 +42,10 @@ class DocumentsController < ApplicationController
   	@document = Document.find(params[:id])  
   	encoded = Base64.encode64(@document.to_xml(skip_instruct: true))
   	decoded = Base64.decode64(encoded)
-  	puts "encoded :\n #{encoded}"
-  	puts "decoded :\n #{decoded}"
   	url = URI.parse('http://localhost:3002/capitalize.json')
   	data = { "data": encoded }
 	res = Net::HTTP.post_form url, data
-	# res = Net::HTTP.start(url.host, url.port) {|http|
-	#   http.request(req)
-	# }
-	puts "response: \n#{res.body}"
 	response_xml = Base64.decode64(res.body)
-	puts "decoded response: \n#{response_xml}"
   	render :xml => response_xml
   end
 
