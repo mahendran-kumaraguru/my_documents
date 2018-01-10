@@ -1,4 +1,13 @@
 class UsersController < ApplicationController
+
+	before_action :check_logged_in
+
+  	def check_logged_in
+    	if session[:user_id]
+      		redirect_to documents_path
+    	end
+  	end
+
 	def new
 		@user = User.new
 	end

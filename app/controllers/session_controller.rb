@@ -1,4 +1,12 @@
 class SessionController < ApplicationController
+  before_action :check_logged_in, :only => [:new]
+
+  def check_logged_in
+    if session[:user_id]
+      redirect_to documents_path
+    end
+  end
+
   def new
   end
 
