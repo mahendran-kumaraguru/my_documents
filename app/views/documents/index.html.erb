@@ -1,0 +1,13 @@
+
+<%= link_to "New Document", new_document_path %>
+
+<table>
+<thead><th>Title</th><th>Author</th><th>Content</th></thead>
+<% @documents.each do |doc| %>
+<tr>
+	<td><%= doc.title %></td>
+	<td><%= doc.author %></td>
+	<td><%= doc.content %></td>
+</tr>
+<% end %>
+</table>

@@ -1,0 +1,12 @@
+<center>
+<h3> New Document </h3>
+<%= form_for @document do |f| %>
+	<%= f.label :title %><br/>
+	<%= f.text_area :title, cols: "100", rows: "1" %></p>
+	<p><%= f.label :author %> <br/> 
+	<%= f.text_area :author, cols: "100", rows: "1" %> </p>
+	<p><%= f.label :content %> <br/> 
+	<%= f.text_area :content, cols: "200", rows: "20" %> </p>
+	<%= f.submit "Save Document"%>
+<% end %>
+</center>
