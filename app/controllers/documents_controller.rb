@@ -42,7 +42,7 @@ class DocumentsController < ApplicationController
   	@document = Document.find(params[:id])  
   	encoded = Base64.encode64(@document.to_xml(skip_instruct: true))
   	decoded = Base64.decode64(encoded)
-  	url = URI.parse('http://localhost:3002/capitalize.json')
+  	url = URI.parse('https://mahii-document-processor.herokuapp.com/capitalize.json')
   	data = { "data": encoded }
 	res = Net::HTTP.post_form url, data
 	response_xml = Base64.decode64(res.body)
